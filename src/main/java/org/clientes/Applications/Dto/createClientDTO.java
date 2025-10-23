@@ -1,5 +1,5 @@
 package org.clientes.Applications.Dto;
 
-public class createClientDTO {
+public class CreateClientDTO {
     
 }
