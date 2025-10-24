@@ -1,73 +1,39 @@
-# clientes-with-quarkus
+0. EL proyecto fue creado en java 21, base de datos SQL Server, Framework de Quarkus 3.28.5, Maven, Panache y el IDE VScode
+1. EL Proyecto de Microservicio fue creado bajo la arquitectura DDD (Application, DOmain, Infraestructure), para que sea standard su entedimiento
+2. En La capa de Aplicación encontramos: (DTO y los Services)
+3. En la capa de Domain econtramos; (Entities o Modelos, Enums,Strategies, Repositories y Exepciones sobre los Modelos Implementados)
+4. En la capa de Infraestuctura encontramos: (Controllers o Resources, Seeders y Exepciones para validaciones)
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+5. La entidad de clientes se relaciona con las tablas de COuntry, Gender y Status y la tabla de clientes tiene las especificaciones
+que se solicitaron en el enunciado
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+6. Para validar la fecha de cumpleaños que no fuera antes de 1990 y que no aceptara fechas futuras, decidí crear una anotación propia
+para poder realizar esta validacion.
 
-## Running the application in dev mode
+7. Para controlar los getter y setters utilizé la libreria de lombok
 
-You can run your application in dev mode that enables live coding using:
+8. Para cargar los datos por defectos utilizé seeders para cada entidad y luego creee un orquestador para que el sea quien inserte los datos en la base 
+de datos.
 
-```shell script
-./mvnw quarkus:dev
-```
+9. Documetación de Swagger http://localhost:8080/q/swagger-ui/#/, para cada resource con sus respectivos ejemplos para pruebas
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+10. Para ejecutar el proyecto por Visual Studio  mvn clean compile quarkus:dev desde la consola.
 
-## Packaging and running the application
+11. Al ejecutar la aplicaciones se realizacion las migraciones por medio de la configuracion en el properties quarkus.hibernate-orm.database.generation=update
+y tambien se ejecutar los seeders para llenar los datos por defecto que se pleantean en el enunciado.
 
-The application can be packaged using:
+12. Para poder crear los seeders siempre hago referencia a los Enums.
 
-```shell script
-./mvnw package
-```
+13. En la estructura interna del proyecto seria (Controller -> Service -> Repository -> Entities), desde que se recibe una peticion del usuario hasta que finaliza.
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+14. Cada COntrolador esta separado para poder cumplir con los principos solid.
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+15. Para manejar los DTO manejé una clase llamada ClientMapperService.java para no mostrar los datos directamente del modelo si no de un DTO basado en el modelo
 
-If you want to build an _über-jar_, execute the following command:
+16. Para validar que la cuenta inicie con el nro de cuente 003 si es de chile y el resto de paises no tengan esa validacion, utilizé el patron strategy implementado
+interfaces y clases abtractas para las operaciones cuando fuera con el pais chile y para las demas cree una por defecto, con eso logro que cuando venga un pais
+con otro tipo de restriccion en la cuenta no afecto la logica del negocio si no que implemento otra interfaz para el pais requerido.
 
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
+17. EN la carpeta de Documentación se encuentra el diagrama entidad relación una vista de Swagger.
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
-
-## Creating a native executable
-
-You can create a native executable using:
-
-```shell script
-./mvnw package -Dnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
-
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/clientes-with-quarkus-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
-
-## Related Guides
-
-- JDBC Driver - H2 ([guide](https://quarkus.io/guides/datasource)): Connect to the H2 database via JDBC
-- Hibernate Validator ([guide](https://quarkus.io/guides/validation)): Validate object properties (field, getter) and method parameters for your beans (REST, CDI, Jakarta Persistence)
-- SmallRye OpenAPI ([guide](https://quarkus.io/guides/openapi-swaggerui)): Document your REST APIs with OpenAPI - comes with Swagger UI
-- Hibernate ORM with Panache ([guide](https://quarkus.io/guides/hibernate-orm-panache)): Simplify your persistence code for Hibernate ORM via the active record or the repository pattern
-- JDBC Driver - MySQL ([guide](https://quarkus.io/guides/datasource)): Connect to the MySQL database via JDBC
-
-## Provided Code
-
-### Hibernate ORM
-
-Create your first JPA entity
-
-[Related guide section...](https://quarkus.io/guides/hibernate-orm)
-
-[Related Hibernate with Panache section...](https://quarkus.io/guides/hibernate-orm-panache)
-
+Gracias
