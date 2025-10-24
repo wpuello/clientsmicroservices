@@ -16,7 +16,7 @@ public class StatusSeeder {
 
     @Transactional
     public void seed() {
-        System.out.println("Ejecutando StatusSeeder...");
+      
 
         if (Status.count() == 0) {
             for (StatusEnum statusEnum : StatusEnum.values()) {

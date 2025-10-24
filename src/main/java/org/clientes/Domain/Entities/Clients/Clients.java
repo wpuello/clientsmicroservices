@@ -20,20 +20,20 @@ import lombok.Data;
 public class Clients extends PanacheEntity {
 
     @Column(length = 255, nullable = false)
-    public String Name;
+    public String name;
 
     @ValidaBirthDate //Creo mi propia anotación: Valido Primero que no acepte fechas futuras y segundo que La fecha de nacimiento debe estar entre 1990 y la fecha actual
     @Column(nullable = false)
-    public LocalDate BirthDate;
+    public LocalDate birthDate;
 
     @ManyToOne
     @JoinColumn(name = "gender_id", nullable = false)
     public Gender gender;
 
-    @Column(length = 15, nullable = false)
+    @Column(length = 15, nullable = false, unique = true)
     @Size(min = 12, max = 15)
     @Pattern(regexp = "^[0-9]+$")
-    public String NumCTA ;
+    public String numCTA ;
 
     @ManyToOne
     @JoinColumn(name = "status_id", nullable = false)
@@ -42,5 +42,11 @@ public class Clients extends PanacheEntity {
     @ManyToOne
     @JoinColumn(name = "country_id", nullable = false)
     public Country country;
+
+    @Column(nullable = true)
+    public LocalDate activatedDate;
+
+    @Column(nullable = true)
+    public LocalDate inactivatedDate;
 
 }

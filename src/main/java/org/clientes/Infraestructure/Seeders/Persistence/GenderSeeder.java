@@ -18,8 +18,7 @@ public class GenderSeeder {
 
     @Transactional
     public void seed() {
-        System.out.println("Ejecutando GenderSeeder...");
-
+       
         if (Gender.count() == 0) {
             for (GenderEnum genderEnum : GenderEnum.values()) {
                 persistGender(genderEnum.name());

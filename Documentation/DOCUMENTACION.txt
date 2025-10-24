@@ -1,0 +1,5 @@
+http://localhost:8080/q/dev-ui/welcome
+http://localhost:8080/q/swagger-ui/
+
+mvn clean install, para compilar desde 0
+mvn clean quarkus:dev

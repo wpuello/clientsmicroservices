@@ -16,8 +16,7 @@ public class CountrySeeder {
 
     @Transactional
     public void seed() {
-        System.out.println("Ejecutando CountrySeeder...");
-
+        
         if (Country.count() == 0) {
             for (CountryEnum countryEnum : CountryEnum.values()) {
                 persistCountry(countryEnum.name());
